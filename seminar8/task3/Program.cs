@@ -1,10 +1,14 @@
 ﻿
 //Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
 
-int rows = ReadInt("Введите количество строк: ");
-int columns = ReadInt("Введите количество столбцов: ");
-int[,] array = new int[rows, columns];
-int[,] secondArray = new int[rows, columns];
+int rows = ReadInt("Введите количество строк 1-й матрицы: ");
+int columnsRows = ReadInt("Введите количество строк 2-й и колонок 1-й: ");
+int columns = ReadInt("Введите количество столбцов 2-й матрицы: ");
+
+//Матрицы можно перемножать с разным количеством строк и столбцов
+
+int[,] array = new int[rows, columnsRows];
+int[,] secondArray = new int[columnsRows, columns];
 int[,] resultArray = new int[rows, columns];
 
 FillArrayRandom(array);
@@ -17,11 +21,14 @@ PrintArray2D(secondArray);
 
 Console.WriteLine();
 
-if (array.GetLength(0) != secondArray.GetLength(1))
+// Здесь ошибка - количество колонок первой должно совпадать с количеством строк во второй
+if (array.GetLength(1) != secondArray.GetLength(0))
 {
     Console.WriteLine(" Нельзя перемножить ");
     return;
 }
+
+// почему этот код не в функции?
 for (int i = 0; i < array.GetLength(0); i++)
 {
     for (int j = 0; j < secondArray.GetLength(1); j++)
